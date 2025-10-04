@@ -1,5 +1,5 @@
-import FactFinderWhop from '@/components/FactFinderWhop';
+import FactFinderSimple from '@/components/FactFinderSimple';
 
 export default function ExperiencePage() {
-  return <FactFinderWhop />;
+  return <FactFinderSimple />;
 }
