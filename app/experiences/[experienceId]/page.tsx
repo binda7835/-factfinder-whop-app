@@ -2,15 +2,14 @@ export default function ExperiencePage() {
   return (
     <div style={{
       width: '100%',
-      height: '100vh',
+      minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#f0f2f5',
       fontFamily: 'system-ui, -apple-system, sans-serif',
-      padding: '20px',
-      boxSizing: 'border-box'
+      padding: '20px'
     }}>
       <div style={{
         maxWidth: '600px',
@@ -25,11 +24,7 @@ export default function ExperiencePage() {
           fontSize: '2.5rem',
           fontWeight: 'bold',
           color: '#1a202c',
-          marginBottom: '16px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
+          marginBottom: '16px'
         }}>
           🎉 Fun Fact Generator
         </h1>
@@ -115,18 +110,6 @@ export default function ExperiencePage() {
             transition: 'all 0.2s',
             boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
             marginBottom: '32px'
-          }}
-          onMouseOver={(e) => {
-            if (!e.currentTarget.disabled) {
-              e.currentTarget.style.backgroundColor = '#5a67d8';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }
-          }}
-          onMouseOut={(e) => {
-            if (!e.currentTarget.disabled) {
-              e.currentTarget.style.backgroundColor = '#667eea';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }
           }}
         >
           🎲 Get New Fact
