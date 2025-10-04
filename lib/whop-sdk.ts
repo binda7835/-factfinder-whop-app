@@ -1,23 +1,45 @@
-import { WhopServerSdk } from "@whop/api";
+import { WhopAPI } from '@whop/api';
 
-export const whopSdk = WhopServerSdk({
-	// Add your app id here - this is required.
-	// You can get this from the Whop dashboard after creating an app section.
-	appId: process.env.NEXT_PUBLIC_WHOP_APP_ID ?? "fallback",
-
-	// Add your app api key here - this is required.
-	// You can get this from the Whop dashboard after creating an app section.
-	appApiKey: process.env.WHOP_API_KEY ?? "fallback",
-
-	// This will make api requests on behalf of this user.
-	// This is optional, however most api requests need to be made on behalf of a user.
-	// You can create an agent user for your app, and use their userId here.
-	// You can also apply a different userId later with the `withUser` function.
-	onBehalfOfUserId: process.env.NEXT_PUBLIC_WHOP_AGENT_USER_ID,
-
-	// This is the companyId that will be used for the api requests.
-	// When making api requests that query or mutate data about a company, you need to specify the companyId.
-	// This is optional, however if not specified certain requests will fail.
-	// This can also be applied later with the `withCompany` function.
-	companyId: process.env.NEXT_PUBLIC_WHOP_COMPANY_ID,
+// Initialize the Whop SDK with environment variables
+export const whopSdk = new WhopAPI({
+  apiKey: process.env.WHOP_APP_SECRET || '',
+  appId: process.env.WHOP_APP_ID || '',
 });
+
+// Helper function to verify user token from headers
+export async function verifyUserToken(headers: Headers) {
+  try {
+    // Get the authorization header
+    const authHeader = headers.get('authorization');
+    if (!authHeader) {
+      throw new Error('No authorization header found');
+    }
+
+    // Extract token from "Bearer <token>" format
+    const token = authHeader.replace('Bearer ', '');
+    if (!token) {
+      throw new Error('No token found in authorization header');
+    }
+
+    // Verify the token with Whop API
+    const response = await fetch('https://api.whop.com/api/v2/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Token verification failed: ${response.status}`);
+    }
+
+    const userData = await response.json();
+    return {
+      userId: userData.id,
+      user: userData
+    };
+  } catch (error) {
+    console.error('Token verification error:', error);
+    throw error;
+  }
+}

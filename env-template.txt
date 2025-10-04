@@ -1,0 +1,21 @@
+# Whop App Environment Variables
+# Copy these values from your Whop Developer Dashboard
+# https://whop.com/dashboard/developer/
+
+# Your Whop App ID
+WHOP_APP_ID=your_app_id_here
+
+# Your Whop App Secret
+WHOP_APP_SECRET=your_app_secret_here
+
+# Your Whop App Public Key
+WHOP_APP_PUBLIC_KEY=your_public_key_here
+
+# Webhook Secret (for webhook verification)
+WHOP_WEBHOOK_SECRET=your_webhook_secret_here
+
+# Base URL for your app (use localhost for development)
+WHOP_APP_BASE_URL=http://localhost:3000
+
+# Optional: Additional configuration
+NODE_ENV=development

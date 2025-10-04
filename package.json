@@ -4,17 +4,27 @@
 	"private": true,
 	"scripts": {
 		"dev": "whop-proxy --command 'next dev --turbopack'",
+		"dev:npm": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"setup": "node setup.js"
 	},
 	"dependencies": {
+		"@paralleldrive/cuid2": "^2.2.2",
 		"@vercel/functions": "^2.0.3",
 		"@whop/api": "^0.0.50",
 		"@whop/react": "0.2.36",
-		"next": "15.3.2",
+		"clsx": "^2.1.1",
+		"dotenv": "^17.2.3",
+		"drizzle-kit": "^0.31.5",
+		"drizzle-orm": "^0.44.6",
+		"lucide-react": "^0.544.0",
+		"next": "^15.5.4",
+		"postgres": "^3.4.7",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"tailwind-merge": "^3.3.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
