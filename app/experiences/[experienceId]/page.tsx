@@ -1,5 +1,5 @@
-import FactFinderSimple from '@/components/FactFinderSimple';
+import FactFinderDebug from '@/components/FactFinderDebug';
 
 export default function ExperiencePage() {
-  return <FactFinderSimple />;
+  return <FactFinderDebug />;
 }
