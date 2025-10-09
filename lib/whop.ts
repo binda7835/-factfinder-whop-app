@@ -1,9 +1,5 @@
-import { WhopAPI } from '@whop/api';
-
-// Initialize the Whop SDK
-export const whop = new WhopAPI({
-  apiKey: process.env.WHOP_APP_SECRET || '',
-});
+// Note: WhopAPI import removed due to build issues
+// Using direct API calls instead for production stability
 
 // Helper function to get user from headers
 export async function getUserFromHeaders(headers: Headers) {

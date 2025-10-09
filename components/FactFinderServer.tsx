@@ -1,6 +1,24 @@
 import { headers } from 'next/headers';
 import FactFinderClient from './FactFinderClient';
 
+interface User {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  subscription: { 
+    status: string;
+    isPayingMember: boolean;
+  };
+}
+
+interface AuthState {
+  isAuthenticated: boolean;
+  isPayingMember: boolean;
+  user: User | null;
+  error: string | null;
+}
+
 /**
  * Production FactFinder Server Component
  * 
@@ -14,84 +32,68 @@ import FactFinderClient from './FactFinderClient';
  * - Production-ready error handling
  */
 export default async function FactFinderServer() {
-  let authState = {
-    isAuthenticated: false,
-    isPayingMember: false,
-    user: null,
-    error: null
-  };
-
-  try {
-    // Get headers for authentication
-    const headersList = await headers();
-    
-    // Check if we're in development mode (no authorization header)
-    const authHeader = headersList.get('authorization');
-    
-    if (!authHeader && process.env.NODE_ENV === 'development') {
-      // Development mode - simulate authenticated user
-      console.log('Development mode: Simulating authenticated user');
-      authState = {
-        isAuthenticated: true,
-        isPayingMember: true, // Free for all users
-        user: {
-          id: 'dev_user_123',
-          name: 'Muhammad Usman',
-          username: 'muhammad_usman',
-          email: 'muhammad@example.com',
-          subscription: { 
-            status: 'active',
-            isPayingMember: true // Free for all users
-          }
-        },
-        error: null
-      };
-    } else if (!authHeader) {
-      // Production mode but no auth header - allow access for free users
-      console.log('No auth header: Allowing free access');
-      authState = {
-        isAuthenticated: true,
-        isPayingMember: true, // Free for all users
-        user: {
-          id: 'free_user_123',
-          name: 'Guest User',
-          username: 'guest_user',
-          email: 'guest@example.com',
-          subscription: { 
-            status: 'active',
-            isPayingMember: true // Free for all users
-          }
-        },
-        error: null
-      };
-    } else {
-      // Production mode with auth header - allow free access for all
-      // In a real implementation, you would verify the token here
-      // For now, we'll allow free access to all authenticated users
-      authState = {
-        isAuthenticated: true,
-        isPayingMember: true, // Free for all users
-        user: {
-          id: 'authenticated_user',
-          name: 'Authenticated User',
-          username: 'authenticated_user',
-          email: 'user@example.com',
-          subscription: { 
-            status: 'active',
-            isPayingMember: true // Free for all users
-          }
-        },
-        error: null
-      };
-    }
-  } catch (error) {
-    // Handle authentication errors
-    console.error('Authentication error:', error);
+  // Get headers for authentication
+  const headersList = await headers();
+  
+  // Check if we're in development mode (no authorization header)
+  const authHeader = headersList.get('authorization');
+  
+  let authState: AuthState;
+  
+  if (!authHeader && process.env.NODE_ENV === 'development') {
+    // Development mode - simulate authenticated user
+    console.log('Development mode: Simulating authenticated user');
     authState = {
-      isAuthenticated: false,
-      isPayingMember: false,
-      user: null,
-      error: error instanceof Error ? error.message : 'Authentication failed'
+      isAuthenticated: true,
+      isPayingMember: true, // Free for all users
+      user: {
+        id: 'dev_user_123',
+        name: 'Muhammad Usman',
+        username: 'muhammad_usman',
+        email: 'muhammad@example.com',
+        subscription: { 
+          status: 'active',
+          isPayingMember: true // Free for all users
+        }
+      },
+      error: null
+    };
+  } else if (!authHeader) {
+    // Production mode but no auth header - allow access for free users
+    console.log('No auth header: Allowing free access');
+    authState = {
+      isAuthenticated: true,
+      isPayingMember: true, // Free for all users
+      user: {
+        id: 'free_user_123',
+        name: 'Guest User',
+        username: 'guest_user',
+        email: 'guest@example.com',
+        subscription: { 
+          status: 'active',
+          isPayingMember: true // Free for all users
+        }
+      },
+      error: null
+    };
+  } else {
+    // Production mode with auth header - allow free access for all
+    // In a real implementation, you would verify the token here
+    // For now, we'll allow free access to all authenticated users
+    authState = {
+      isAuthenticated: true,
+      isPayingMember: true, // Free for all users
+      user: {
+        id: 'authenticated_user',
+        name: 'Authenticated User',
+        username: 'authenticated_user',
+        email: 'user@example.com',
+        subscription: { 
+          status: 'active',
+          isPayingMember: true // Free for all users
+        }
+      },
+      error: null
     };
   }
 
