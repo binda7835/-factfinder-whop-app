@@ -1,10 +1,12 @@
-import { WhopAPI } from '@whop/api';
+// Note: WhopAPI import removed due to build issues
+// Using direct API calls instead for production stability
 
-// Initialize the Whop SDK with environment variables
-export const whopSdk = new WhopAPI({
+// Initialize Whop SDK configuration
+export const whopConfig = {
   apiKey: process.env.WHOP_APP_SECRET || '',
   appId: process.env.WHOP_APP_ID || '',
-});
+  baseUrl: 'https://api.whop.com/api/v2'
+};
 
 // Helper function to verify user token from headers
 export async function verifyUserToken(headers: Headers) {

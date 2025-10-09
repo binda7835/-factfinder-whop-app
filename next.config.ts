@@ -1,4 +1,3 @@
-import { withWhopAppConfig } from "@whop/react/next.config";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -6,6 +5,12 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [{ hostname: "**" }],
 	},
+	// Fix workspace root warning
+	outputFileTracingRoot: process.cwd(),
+	// Production optimizations
+	experimental: {
+		optimizePackageImports: ['@whop/react', '@whop/api'],
+	},
 };
 
-export default withWhopAppConfig(nextConfig);
+export default nextConfig;

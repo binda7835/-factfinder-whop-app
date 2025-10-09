@@ -1,6 +1,7 @@
 import { WhopApp } from "@whop/react/components";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +15,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Whop App",
-	description: "My Whop App",
+	title: "FactFinder Pro - Whop App",
+	description: "Premium fact generator for Whop members. Get random fun facts, save favorites, and share amazing discoveries.",
+	keywords: ["facts", "trivia", "whop", "premium", "membership"],
+	authors: [{ name: "FactFinder Pro Team" }],
+	openGraph: {
+		title: "FactFinder Pro",
+		description: "Premium fact generator for Whop members",
+		type: "website",
+	},
 };
 
 export default function RootLayout({
@@ -28,7 +36,9 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<WhopApp>{children}</WhopApp>
+				<ErrorBoundary>
+					<WhopApp>{children}</WhopApp>
+				</ErrorBoundary>
 			</body>
 		</html>
 	);
