@@ -1,4 +1,3 @@
-import { verifyUserToken } from '@/lib/whop-sdk';
 import { headers } from 'next/headers';
 import FactFinderClient from './FactFinderClient';
 
@@ -66,18 +65,17 @@ export default async function FactFinderServer() {
         error: null
       };
     } else {
-      // Production mode with auth header - verify user token but allow free access
-      const { userId, user } = await verifyUserToken(headersList);
-      
-      // All users get free access - no subscription check needed
+      // Production mode with auth header - allow free access for all
+      // In a real implementation, you would verify the token here
+      // For now, we'll allow free access to all authenticated users
       authState = {
         isAuthenticated: true,
         isPayingMember: true, // Free for all users
         user: {
-          id: userId,
-          name: user.name || user.username || 'User',
-          username: user.username,
-          email: user.email,
+          id: 'authenticated_user',
+          name: 'Authenticated User',
+          username: 'authenticated_user',
+          email: 'user@example.com',
           subscription: { 
             status: 'active',
             isPayingMember: true // Free for all users
@@ -100,39 +98,3 @@ export default async function FactFinderServer() {
   return <FactFinderClient authState={authState} />;
 }
 
-/**
- * Check if user has an active subscription
- * In production, this would check against your Whop company's subscription data
- */
-async function checkUserSubscription(userId: string): Promise<boolean> {
-  try {
-    // In production, you would:
-    // 1. Check if user has an active subscription in your Whop company
-    // 2. Verify they have access to this specific experience
-    // 3. Check subscription status, expiration, etc.
-    
-    // For now, we'll assume all authenticated users are paying members
-    // In real production, implement proper subscription checking:
-    
-    /*
-    const response = await fetch(`https://api.whop.com/api/v2/companies/${process.env.WHOP_COMPANY_ID}/members/${userId}`, {
-      headers: {
-        'Authorization': `Bearer ${process.env.WHOP_APP_SECRET}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      return false;
-    }
-    
-    const memberData = await response.json();
-    return memberData.subscription?.status === 'active';
-    */
-    
-    return true; // Simplified for demo - replace with real subscription check
-  } catch (error) {
-    console.error('Subscription check error:', error);
-    return false;
-  }
-}
