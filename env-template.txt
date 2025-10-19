@@ -19,3 +19,6 @@ WHOP_APP_BASE_URL=http://localhost:3000
 
 # Optional: Additional configuration
 NODE_ENV=development
+
+# Optional: Second Whop App (if building another app)
+NEXT_PUBLIC_WHOP_APP2_ID=your_second_app_id_here

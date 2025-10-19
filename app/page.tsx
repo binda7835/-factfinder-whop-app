@@ -18,9 +18,9 @@ export default function Page() {
 					</div>
 				</div>
 
-				<div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
 					{/* App Features */}
-					<div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
 						<h2 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
 							<span className="text-3xl mr-3">🚀</span>
 							App Features
@@ -50,7 +50,7 @@ export default function Page() {
 					</div>
 
 					{/* Technical Stack */}
-					<div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
 						<h2 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
 							<span className="text-3xl mr-3">⚡</span>
 							Technical Stack
@@ -82,7 +82,7 @@ export default function Page() {
 
 				{/* Setup Instructions */}
 				<div className="space-y-8">
-					<div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
 						<h2 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
 							<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-indigo-600 text-white mr-3">
 								1
@@ -92,7 +92,7 @@ export default function Page() {
 						<p className="text-gray-600 mb-4">
 							Your app is ready to be installed into a Whop. Click the link below to install it.
 						</p>
-						{process.env.NEXT_PUBLIC_WHOP_APP_ID ? (
+                        {process.env.NEXT_PUBLIC_WHOP_APP_ID ? (
 							<a
 								href={`https://whop.com/apps/${process.env.NEXT_PUBLIC_WHOP_APP_ID}/install`}
 								target="_blank"
@@ -106,6 +106,19 @@ export default function Page() {
 								Please set your environment variables to see the installation link
 							</span>
 						)}
+                        {/* Second app install link if configured */}
+                        <div className="mt-4">
+                          {process.env.NEXT_PUBLIC_WHOP_APP2_ID ? (
+                            <a
+                              href={`https://whop.com/apps/${process.env.NEXT_PUBLIC_WHOP_APP2_ID}/install`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                            >
+                              🚀 Install Second App
+                            </a>
+                          ) : null}
+                        </div>
 					</div>
 
 					<div className="bg-white p-6 rounded-lg shadow-md">
@@ -153,7 +166,7 @@ export default function Page() {
 					</div>
 				</div>
 
-				<div className="mt-12 text-center">
+                <div className="mt-12 text-center">
 					<p className="text-gray-500 mb-4">
 						Need help? Visit the{" "}
 						<a
@@ -168,6 +181,14 @@ export default function Page() {
 					<p className="text-sm text-gray-400">
 						FactFinder App - Built with Next.js & Whop SDK
 					</p>
+                    <div className="mt-6">
+                      <a
+                        href="/app2"
+                        className="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                      >
+                        Open Second App
+                      </a>
+                    </div>
 				</div>
 			</div>
 		</div>
