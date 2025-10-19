@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
 		WHOP_APP_PUBLIC_KEY: process.env.WHOP_APP_PUBLIC_KEY || 'demo_public_key',
 		WHOP_WEBHOOK_SECRET: process.env.WHOP_WEBHOOK_SECRET || 'demo_webhook_secret',
 		NEXT_PUBLIC_WHOP_APP_ID: process.env.NEXT_PUBLIC_WHOP_APP_ID || 'demo_app_id',
+		// Second app support
+		NEXT_PUBLIC_WHOP_APP2_ID: process.env.NEXT_PUBLIC_WHOP_APP2_ID || 'demo_app2_id',
 	},
 };
 
