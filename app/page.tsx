@@ -120,11 +120,12 @@ export default function Page() {
 							The app will check if they're paying members and show fun facts accordingly.
 						</p>
 						<div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-							<p className="text-sm text-blue-800">
-								<strong>App Path:</strong> /experiences/[experienceId]<br />
-								<strong>Access Control:</strong> Paying members only<br />
-								<strong>API:</strong> https://uselessfacts.jsph.pl/random.json
-							</p>
+					<p className="text-sm text-blue-800">
+						<strong>FactFinder Path:</strong> /experiences/[experienceId]<br />
+						<strong>QuoteMaster Path:</strong> /quotes/[experienceId]<br />
+						<strong>Access Control:</strong> Paying members only<br />
+						<strong>APIs:</strong> facts: https://uselessfacts.jsph.pl/random.json • quotes: https://api.quotable.io/random
+					</p>
 						</div>
 					</div>
 
@@ -154,6 +155,20 @@ export default function Page() {
 				</div>
 
 				<div className="mt-12 text-center">
+                <div className="mb-6 flex flex-col gap-3 items-center">
+                  <a
+                    href="/experiences/test123"
+                    className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                  >
+                    🎲 Open FactFinder
+                  </a>
+                  <a
+                    href="/quotes/test123"
+                    className="inline-block bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors"
+                  >
+                    📝 Open QuoteMaster
+                  </a>
+                </div>
 					<p className="text-gray-500 mb-4">
 						Need help? Visit the{" "}
 						<a
